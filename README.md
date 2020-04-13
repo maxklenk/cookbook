@@ -1,3 +1,20 @@
+# Cookbook ![Build and Deploy LaTeX](https://github.com/maxklenk/cookbook/workflows/Build%20and%20Deploy%20LaTeX/badge.svg?branch=master)
+
+[Preview](https://github.com/maxklenk/cookbook/blob/gh-pages/cookbook.pdf)
+[Download](https://github.com/maxklenk/cookbook/raw/gh-pages/cookbook.pdf)
+
+## PDF erzeugen
+
+```
+pdflatex cookbook.tex
+```
+
+## Rezept hinzufügen
+
+Datei `rezepte/leer.tex` in einen der Kategorieordner kopieren und umbenennen.
+Die neue Datei in `cookbook.tex` referenzieren und das Rezept eintragen.
+
+```LaTex
 % Beginn eines neuen Rezeptes
 % toc: Text für das Inhaltsverzeichnis, wenn nicht angegeben, dann wird der feste Parameter in den {}-Klammern genommen
 % font: für die Rezeptüberschrift benutzte Schriftart, wenn nicht angegeben, wird default genutzt
@@ -29,3 +46,4 @@
 \graphic{./bilder/...}	% Grafik dem Rezept beifügen
 
 \end{recipe}
+```
