@@ -1,0 +1,149 @@
+\documentclass{scrartcl}
+\usepackage{cook}
+
+% Schriftarten für Überschriften
+\usepackage{aurical}
+\usepackage{calligra}
+\usepackage{yfonts}
+\usepackage{uncial}
+\usepackage{rustic}
+\usepackage{rotunda}
+\usepackage{inslrmin}
+\usepackage{pbsi}
+\usepackage{egothic}
+\usepackage{sqrcaps}
+\usepackage{tikz}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+\usepackage[ % muss letztes Package sein!
+	pdftitle={Muttis beste Küche - Kochen wie Daheim},%
+	pdfauthor={Max Klenk},%
+	pdfsubject={Kochbuch},%
+	pdfcreator={PDFLaTeX},
+	pdfproducer={LaTeX mit Windows 7},
+	colorlinks=true, urlcolor=darkblue, linkcolor=darkblue
+ ]{hyperref} % 
+
+%\twosided 	% Zweiseitig?
+
+\begin{document}
+
+% entweder die Optionen ausfüllen und mit \maketitle Titelseite erzeugen oder...
+%\title{Meine Küche}
+%\author{Autor}
+
+% ... die Titelseite selber zusammenstellen
+\begin{titlepage}
+		\begin{figure}[H]% einfügen der Grafik
+			\centering\includegraphics[height=0.5\textheight]{./bilder/start_.jpg} \\
+			Muttis beste Küche - Kochen wie Daheim \\
+			 \
+			 \\
+			 \
+			 \\
+			 \
+			 \\
+			 \
+			 \\
+			 \
+			 \\
+			 \
+			 \\
+			 \
+			 \\
+			 \
+			 \\
+			 \
+			 \\
+			Bewährte Rezepte gesammelt für Max, Clemens und Lucius (und ein paar Ergänzungen).
+		\end{figure}
+%\newpage
+%\centering\vspace*{3cm}\copyright \ 2012 Max Klenk
+\end{titlepage}
+
+\tableofcontents
+
+% Standardfarbe, -schriftart für die Überschrift
+\recipecolor{C20E0F}
+\recipefont{\texttt}
+
+% wenn \twosided aktiv ist (bei Zweiseitig ist die ungerade Zahl immer auf der Vorderseite)
+% müssen hier soviele newpages einfügen bis die erste Sektion auf einer ungeraden Seite beginnt
+%\newpage~
+
+\newpage % vor jede Sektion muss ein Newpage kommen
+{\vspace*{4cm}\section{Vorspeisen}}
+\input{./rezepte/pinguine.tex}
+
+\newpage
+{\vspace*{4cm}\section{Salate}}
+\input{./rezepte/spargelsalat.tex}
+
+\newpage
+{\vspace*{4cm}\section{Mahlzeit}}
+\input{./rezepte/gefuelltes_brot.tex}
+\input{./rezepte/quiche_lorraine.tex}
+\input{./rezepte/lasagne.tex}
+\input{./rezepte/ratatouille.tex}
+\input{./rezepte/curry-hack-pancakes.tex}
+\input{./rezepte/gebackene_forelle.tex}
+\input{./rezepte/kuerbis_flammkuchen.tex}
+\input{./rezepte/zwiebelkuchen.tex}
+
+\newpage
+{\vspace*{4cm}\section{zu Nudeln}}
+\input{./rezepte/gulasch_klenk.tex}
+\input{./rezepte/gulasch_josi.tex}
+\input{./rezepte/hackfleischsosse.tex}
+\input{./rezepte/saltimbocca.tex}
+\input{./rezepte/zucchinisosse.tex}
+
+\newpage
+{\vspace*{4cm}\section{unsortiert}}
+\input{./rezepte/koenigsberger_klopse.tex}
+\input{./rezepte/frikadellen.tex}
+\input{./rezepte/weisse_bohnen.tex}
+\input{./rezepte/putengulasch.tex}
+
+\newpage
+{\vspace*{4cm}\section{Süßes}}
+\input{./rezepte/apfelstrudel.tex}
+\input{./rezepte/appelraenzjer.tex}
+\input{./rezepte/obstmichel.tex}
+\input{./rezepte/quarkauflauf.tex}
+\input{./rezepte/topfenpalatschinken.tex}
+
+\newpage
+{\vspace*{4cm}\section{Kuchen}}
+\input{./rezepte/donauwelle.tex}
+\input{./rezepte/kaesekuchen.tex}
+\input{./rezepte/apfel-rahmkuchen.tex}
+\input{./rezepte/biskuitrolle_mit_himbeeren.tex}
+\input{./rezepte/mandel_zimtkuchen.tex}
+\input{./rezepte/butterkuchen.tex}
+\input{./rezepte/streuselkuchen.tex}
+\input{./rezepte/zimtschnecken.tex}
+\input{./rezepte/faltenkuchen.tex}
+
+\newpage
+{\vspace*{4cm}\section{Plätzchen}}
+\input{./rezepte/schokoladenbrot.tex}
+\input{./rezepte/kokosmakronen.tex}
+\input{./rezepte/rosmarinkekse.tex}
+\input{./rezepte/vanillekipfel.tex}
+
+\newpage
+{\vspace*{4cm}\section{Getränke}}
+\input{./rezepte/limes_himbeer.tex}
+\input{./rezepte/likoer_pfirsich_maracuja.tex}
+
+\end{document}
+
+%\begin{recipe}{}
+%	\timerecipe{ca. $1\frac{1}{4}$}
+%	\personcount{4-6}
+%	\ingredient{}
+%
+%\step
+%
+%\end{recipe}

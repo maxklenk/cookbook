@@ -1,0 +1,221 @@
+% Pakete
+\usepackage[%
+		a5paper,%
+		landscape,%
+		left=1cm,%
+		right=0.5cm,%
+		top=1.5cm,%
+		bottom=0.5cm,%
+		includefoot,%
+		footskip=0.5cm]
+		{geometry}		% landscape -> Querformat
+\usepackage{cmap}		% to make the PDF files "searchable and copyable" in pdf viewer
+\usepackage[ngerman]{babel}	% deutschsprachig
+\usepackage[utf8]{inputenc}	% utf8 encoding
+\usepackage[T1]{fontenc}	% Schriftkodierung
+\usepackage{lmodern}		% skalierbare Schriftfamilie "Latin Modern" (default: bitmapped "Computer Modern")
+\usepackage{graphicx}		% Einbinden von Grafiken
+\usepackage{rotating}		% Text drehen
+\usepackage{amsmath}		% Matheumgebung
+\usepackage{amssymb}		% Zusatzsymbole zB Square Vartriangle etc
+\usepackage{moreverb}		% erweiterte verbatim Umgebung
+\usepackage{listings}		% Listings -> Quellcodedarstellung für viele verschiedene Sprachen
+\usepackage{subfigure}		% Unterbilder
+\usepackage{xcolor}		% Farbdefinitionen möglich
+\usepackage{pdfpages}		% Einbinden von PDF Seiten aus PDF Dokument
+\usepackage{nicefrac}		% Darstellung eines Bruchs im Fließtext; Aussehen zB 1/4
+\usepackage{acronym}		% Abkürzungsverzeichnis --> nur verwendete Abkürzungen listen [printonlyused]
+\usepackage{bibgerm}		% deutsches Literaturverzeichnis
+\usepackage{caption}		% viele caption Formatierungsmöglichkeiten
+\usepackage{setspace}		% Zeilenabstand festlegen
+\usepackage{microtype}		% Verbessert Textsatz
+\usepackage{fixltx2e}		% Verbessert einige Kernkompetenzen von LaTeX2e
+\usepackage{ellipsis}		% Korrigiert den Weißraum um Auslassungspunkte
+\usepackage{units}		% Einheiten komfortabel darstellen
+\usepackage{textcomp}		% einige Text-Mode Mathe Symbole, wie zB Mal-Zeichen x (siehe The Comprehensive LaTeX Symbol List)
+\usepackage{gensymb}		% celsius, micro, ohm, perthousand, degree in Mathe und Textmodus
+\usepackage{ifthen}		% stellt ifthenelse Befehl zur Verfügung
+\usepackage{keyval}		% mehrere optionale Parameter in Befehlen
+\usepackage[clock]{ifsym}		% Symbolpackage zB \Interval, \Wecker etc
+\parindent0cm 			% verhindert Absatzeinrückung
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pstricks} % Einbindung von ps grafiken und pstricks
+\usepackage{pst-pdf} % pstricks und ps grafiken in pdf-latex
+
+
+% für Flieumgebungen; \begin{figure}[H] -> figure wirklich an dieser Stelle
+\usepackage{float} 
+\restylefloat{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Counterdefinitionen
+\newcounter{com}% Steuercounter, erkennt ob verschiedene Befehle schon einmal ausgeführt wurden
+\newcounter{steps}% zählt die Rezeptschritte
+\newcounter{recipes}% zählt die Rezepte
+\newcounter{recipepages}
+\setcounter{recipepages}{1}
+\setcounter{recipes}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% neue If-Umgebungen
+\newif\ifperson\personfalse% fragt ab, ob Personenanzahl für dieses Rezept angegeben wurde (default: false)
+\newif\iftimerecipe\timerecipefalse% fragt ab, ob Zubereitungszeit angegeben wurde (default: false)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\person}{0}% speichert die aktuelle Personenanzahl
+\newcommand{\persontext}{Personen}
+\newcommand{\timerec}{0}% speichert die aktuelle Zubereitungszeit in Stunden
+\newcommand{\timetext}{Stunden}
+
+\newcommand{\twosided}{\renewcommand{\twosidedbool}{1}}
+\newcommand{\twosidedbool}{0}
+
+\newcommand{\personcount}[2][Personen]{\renewcommand{\person}{#2}\persontrue \renewcommand{\persontext}{#1}} % Anzahl der Personen für das Gericht
+\newcommand{\timerecipe}[2][Stunden]{\renewcommand{\timerec}{#2}\timerecipetrue \renewcommand{\timetext}{#1}} % Angabe der Zubereitungszeit in Stunden
+
+\newcommand{\recipecolorset}{000000}% speichert die aktuelle Farbe für Überschrift und Steps für jedes Gericht
+\newcommand{\recipecolor}[1]{\renewcommand{\recipecolorset}{#1}}% ändert die aktuelle Farbe (Format: HEX rrggbb)
+
+\newcommand{\recipefontset}{\texttt}% speichert die aktuelle Schriftart für die Überschrift
+\newcommand{\recipefont}[1]{\renewcommand{\recipefontset}{#1}}% ändert die aktuelle Schriftart (Bsp: \texttt, \textrm)
+
+\newcommand{\toc}{1}% beinhaltet bei jedem Rezept den Inhaltsverzeichniseintrag
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\graphic}[1]{% fügt automatisch eine Grafik dem rezept bei, Parameter ist der Dateiname (*.jpg)
+	\end{list}\end{minipage}% beendet die Rezeptbeschreibung
+	\begin{figure}[H]% einfügen der Grafik
+		\begin{center}\includegraphics[height=0.9\textheight]{#1}\end{center}%
+	\end{figure}%
+	\setcounter{com}{3}% Steuercounter auf 3 setzen, damit wird gekennzeichnet, dass eine Grafik eingefügt wurde
+}
+
+% beschreibt einen Zubereitungsschritt, Parameter ist der Listenanstrich (default: arabische Zahlen)
+% Bsp:	step Hallo	-->  1	Hallo
+%	step[10] Hallo	--> 10	Hallo
+%	step[] Hallo	--> 	Hallo --> wird für Tippboxen verwendet
+\newcommand{\step}[1][\arabic{steps}]{%
+	\ifnum\value{com}=1% Abfrage ob es sich um den ersten Zubereitungsschritt handelt
+		\end{flushright}% Zutatenumgebung muss geschlossen werden
+		\end{minipage}%
+		%
+		\setcounter{com}{2}% Counter auf 2, damit wird gekennzeichnet, dass der Abschnitt Zutaten beendet ist
+		\hspace*{0.6cm}% Abstand zwischen Zutaten und Anleitungsteil
+		%\addtolength{\textwidth}{-1cm}%
+		\begin{minipage}[t]{0.62\textwidth}% Minipage für die Zubereitungsschritte wird erzeugt
+	\fi%
+	%
+	\ifnum\value{steps}>1% für jeden Schritt existiert eine eigene List-Umgebung - ab dem ersten muss die Liste
+		\ifthenelse{\equal{\value{recipepages}}{1}}
+			{\end{list}}% hinzufügen zum Inhaltsverzeichnis
+			{\setcounter{recipepages}{1}}%
+
+% 		ifnum\value{recipepages}=0%
+% 			\end{list}% mit dem End-Tag geschlossen werden
+		%\fi%
+		%\setcounter{recipepages}{0}%
+	\fi%
+	%
+	\definecolor{recipecolor}{HTML}{\recipecolorset}% Farbdefinition aus der aktuelle Farbangabe
+	\begin{list}{% Liste für jeden Schritt neu beginnen
+		\textcolor{recipecolor}{{\huge #1}}% Listenanstrich (Aussehen frei definierbar)
+	}%
+	\item% Beginn des Zubereitungsschrittes (Listenanstrich)
+	\stepcounter{steps}% zählt den Zähler nach oben
+}
+
+% umrahmte Box für Tipps, Nutzung: \step[]\tippbox{Tipp: Das ist ein Tipp!}
+\newcommand{\tippbox}[1]{%
+	\fbox{\parbox{0.89\textwidth}{#1}}%
+}%
+
+
+% beschreibt Zutat, Übergabeparameter ist die Zutatenbeschreibung
+\newcommand{\ingredient}[1]{%
+	\ifnum\value{com}=0% bei der ersten Zutat muss Umgebung aufgemacht werden (Minipage), Counter ist auf 0
+		\begin{minipage}[t]{0.3\textwidth}%
+		\begin{flushright}% rechtsbündig
+		%
+		\iftimerecipe% Abfrage, ob Zubereitungszeit angegeben wurde
+			\Interval\ \mbox{\timerec} \timetext \\[0.3cm]% Zubereitungszeit -> \Interval gibt das Symbol an. (siehe Doku Latex Symbole)
+		\fi%
+		\ifperson%
+			Zutaten für \mbox{\person} \persontext \\[0.3cm]% Personenanzahl
+		\fi%
+		\setcounter{com}{1}% Counter auf 1 setzen, das heißt Zutatenbereich wurde begonnen
+	\fi%
+	\underline{\textit{#1}}\\[.2cm]% Zutat kursiv und unterstrichen hinzufügen
+}
+
+\newcommand{\recipenewpage}{%
+	\end{list}%
+	\end{minipage}%
+	\newpage~%
+	\setcounter{com}{0}%
+	\subsection*{}\vspace*{-0.9cm}
+	{\centering\textcolor{recipecolor}{{\recipefontset{\huge }\\[0.4cm]}}}%
+	\ingredient{Fortsetzung:}%
+	\setcounter{recipepages}{10}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% für Umgebung recipe können 3 optionale Parameter übergeben werden.
+%Parameter:
+% toc: Text für das Inhaltsverzeichnis, wenn nicht angegeben, dann wird der feste Parameter genommen
+% font: für die Rezeptüberschrift benutzte Schriftart, wenn nicht angegeben, wird default genutzt
+% color: Farbe für Überschrift und Zubereitungspunkte, wenn nicht angegeben, wird default genommen
+\define@key{recipe}{toc}[1]{\renewcommand{\toc}{#1}}
+\define@key{recipe}{font}{\recipefont{#1}}
+\define@key{recipe}{color}{\recipecolor{#1}}
+
+% recipe Umgebung, beschreibt ein Rezept, neue Seite für jedes Rezept
+% 3 optionale Parameter (siehe oben), ein fester Parameter für Rezeptüberschrift
+\newenvironment{recipe}[2][]{%
+	\setcounter{com}{0}% Counter zurcüksetzen
+	\setcounter{steps}{1}%
+	\addtocounter{recipes}{1}
+	\setkeys{recipe}{#1}% einlesen der optionalen Parameter
+	\if \twosidedbool 1
+		\newpage~
+		\ifodd \thepage
+		\else
+			\newpage~
+		\fi
+		\subsection*{}\vspace*{-1.9cm}
+	\else
+		\newpage
+		\subsection*{}\vspace*{-0.9cm}
+	\fi
+
+	
+% 	\newpage~% neue Seite für jedes Rezept
+	\definecolor{recipecolor}{HTML}{\recipecolorset}% Farbe aus Farbdefinition setzen
+	
+%	\if \hasImage 1
+%		% Add Image
+%		\begin{center}
+%		{\textcolor{recipecolor}{{\recipefontset{\huge #2}}}}%
+%		\end{center}
+%		\tikz[remember picture,overlay] \node[opacity=0.3,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{\theImage};
+%		\newpage
+%	\fi
+
+	% Name des Rezepts, zentriert, groß, mit Abstand zur Rezeptbeschreibung
+	{\centering\textcolor{recipecolor}{{\recipefontset{\huge #2}\\[0.4cm]}}}%
+	\ifthenelse{\equal{\toc}{1}}% schauen, ob optionaler Name gesetzt
+		{\addcontentsline{toc}{subsection}{\arabic{recipes} #2}}% hinzufügen zum Inhaltsverzeichnis
+		{\addcontentsline{toc}{subsection}{\arabic{recipes} \toc}}%
+}%
+{% dieser Teil wird bei \end{recipe} ausgefhürt
+\ifnum\value{com}<3% schauen, ob Rezept ein Bild hat, wenn nicht, dann wird Rezept beendet
+	\end{list}\end{minipage}%
+	\if \twosidedbool 1
+		\ifodd \thepage
+			\newpage~
+		\fi
+	\fi
+\fi%
+
+}%
