@@ -1,6 +1,7 @@
-\newpage
-\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/gefueltes_brot_ratio.jpg}};
-
+\ifdefined\withimages
+	\newpage
+	\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/gefueltes_brot_ratio.jpg}};
+\fi
 
 \begin{recipe}[]{Gefülltes Brot} %Josi
 	\timerecipe[Minuten]{ca. 15 + 60 + 15 + 30} %mit [EINHEIT]

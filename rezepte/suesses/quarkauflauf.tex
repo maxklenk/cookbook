@@ -1,5 +1,7 @@
-\newpage
-\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/quarkauflauf_ratio.jpg}};
+\ifdefined\withimages
+	\newpage
+	\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/quarkauflauf_ratio.jpg}};
+\fi
 
 \begin{recipe}[]{Quarkauflauf} %MUTTI 1
 	\timerecipe[Minuten]{ca. 20 + 40} %mit [EINHEIT]

@@ -1,9 +1,11 @@
-\newpage
-\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/pinguine_ratio.jpg}};
+\ifdefined\withimages
+  \newpage
+  \tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/pinguine_ratio.jpg}};
+\fi
 
 \begin{recipe}[]{Pinguine} %Quelle
-	\timerecipe[Minuten]{ca. 30} %mit [EINHEIT]
-	\personcount[Stück]{10} % mit[ART]
+  \timerecipe[Minuten]{ca. 30} %mit [EINHEIT]
+  \personcount[Stück]{10} % mit[ART]
 	\ingredient{1 Karotte} % ggf. \nicefrac{1}{2}
 	\ingredient{20 dunkle Weintrauben}
 	\ingredient{200g Frischkäse}

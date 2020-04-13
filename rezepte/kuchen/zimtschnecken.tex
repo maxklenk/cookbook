@@ -1,15 +1,7 @@
-
-\newpage
-\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/zimtschnecken_ratio.jpg}};
-
-
-%\begin{center}
-%  \makebox[\textwidth]{\includegraphics[height=\paperheight,width=\paperwidth]{./bilder/zimtschnecken.jpg}}
-%\end{center}
-
-
-%\includegraphics[width=\textwidth]{./bilder/zimtschnecken.jpg}
-%\setImage{./bilder/zimtschnecken.jpg}
+\ifdefined\withimages
+	\newpage
+	\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/zimtschnecken_ratio.jpg}};
+\fi
 
 \begin{recipe}[]{Zimtschnecken} %Josi
 	\timerecipe[Minuten]{ca. 120} %mit [EINHEIT]

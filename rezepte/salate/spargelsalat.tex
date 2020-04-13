@@ -1,5 +1,7 @@
-\newpage
-\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/spargelsalat_ratio.jpg}};
+\ifdefined\withimages
+	\newpage
+	\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/spargelsalat_ratio.jpg}};
+\fi
 
 \begin{recipe}[]{Warmer Spargelsalat} %Quelle
 	\timerecipe[Minuten]{ca. 30} %mit [EINHEIT]

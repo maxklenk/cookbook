@@ -1,5 +1,7 @@
-\newpage
-\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/faltenkuchen_ratio.jpg}};
+\ifdefined\withimages
+	\newpage
+	\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/faltenkuchen_ratio.jpg}};
+\fi
 
 \begin{recipe}[]{Faltenkuchen} %Quelle
 	\timerecipe[Minuten]{ca. 30+180+40} %mit [EINHEIT]

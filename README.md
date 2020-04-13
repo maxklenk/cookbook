@@ -1,7 +1,12 @@
 # Cookbook ![Build and Deploy LaTeX](https://github.com/maxklenk/cookbook/workflows/Build%20and%20Deploy%20LaTeX/badge.svg?branch=master)
 
+Cookbook (without Images): 
 [Preview](https://github.com/maxklenk/cookbook/blob/gh-pages/cookbook.pdf)
 [Download](https://github.com/maxklenk/cookbook/raw/gh-pages/cookbook.pdf)
+
+Cookbook (with Images): 
+[Preview](https://github.com/maxklenk/cookbook/blob/gh-pages/cookbook_images.pdf)
+[Download](https://github.com/maxklenk/cookbook/raw/gh-pages/cookbook_images.pdf)
 
 ## PDF erzeugen
 

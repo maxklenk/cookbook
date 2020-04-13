@@ -1,5 +1,7 @@
-\newpage
-\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/curry-hack-pancakes_ratio.jpg}};
+\ifdefined\withimages
+	\newpage
+	\tikz[remember picture,overlay] \node[opacity=1,inner sep=0pt] at (current page.center){\includegraphics[width=\paperwidth,height=\paperheight]{./bilder/curry-hack-pancakes_ratio.jpg}};
+\fi
 
 \begin{recipe}[]{Curry-Hack-Pancakes} %Quelle
 	\timerecipe[Minuten]{ca. 30+10+30} %mit [EINHEIT]
